@@ -25,7 +25,7 @@ def export_to_csv(employee_id):
         for task in todos_data:
             task_completed = task.get("completed")
             task_title = task.get("title")
-            csv_writer.writerow([user_id, username, 
+            csv_writer.writerow([user_id, username,
                                 task_completed, task_title])
     print(f"Data exported to {filename}")
 
