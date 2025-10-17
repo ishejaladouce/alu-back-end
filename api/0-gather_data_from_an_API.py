@@ -19,14 +19,11 @@ def get_employee_todo_progress(employee_id):
         SystemExit: If API request fails or employee not found
     """
     try:
-        # Validate employee_id
         if not isinstance(employee_id, int) or employee_id <= 0:
             raise ValueError("Employee ID must be a positive integer")
         
-        # Base URL for the JSONPlaceholder API
         base_url = "https://jsonplaceholder.typicode.com"
         
-        # Fetch employee details
         user_response = requests.get(f"{base_url}/users/{employee_id}")
         if user_response.status_code != 200:
             print(f"Error: Employee with ID {employee_id} not found")
@@ -35,7 +32,6 @@ def get_employee_todo_progress(employee_id):
         user_data = user_response.json()
         employee_name = user_data.get("name")
         
-        # Fetch employee TODO list
         todos_response = requests.get(f"{base_url}/users/{employee_id}/todos")
         if todos_response.status_code != 200:
             print(f"Error: Could not fetch TODO list for employee {employee_id}")
@@ -43,14 +39,11 @@ def get_employee_todo_progress(employee_id):
             
         todos_data = todos_response.json()
         
-        # Calculate progress
         total_tasks = len(todos_data)
         completed_tasks = sum(1 for task in todos_data if task.get("completed"))
         
-        # Display progress
         print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
         
-        # Display completed tasks
         for task in todos_data:
             if task.get("completed"):
                 print(f"\t {task.get('title')}")
