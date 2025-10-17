@@ -32,7 +32,6 @@ def export_all_to_json():
     filename = "todo_all_employees.json"
     with open(filename, 'w') as jsonfile:
         json.dump(all_employees_data, jsonfile)
-    print(f"All data exported to {filename}")
 
 
 if __name__ == "__main__":
